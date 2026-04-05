@@ -11,6 +11,7 @@ import { ParkingService } from '../parking/parking.service';
 import { NotificationService } from '../notification/notification.service';
 import { VehicleFactory } from '../vehicle/vehicle.factory';
 import { DatabaseConnection } from '../../config/database';
+import { Logger } from '../../utils/logger';
 
 export class BookingService {
   private bookingRepo: BookingRepository;
@@ -18,6 +19,7 @@ export class BookingService {
   private slotRepo: ParkingSlotRepository;
   private parkingService: ParkingService;
   private notificationService: NotificationService;
+  private logger: Logger;
 
   constructor(notificationService: NotificationService) {
     this.bookingRepo = new BookingRepository();
@@ -25,6 +27,7 @@ export class BookingService {
     this.slotRepo = new ParkingSlotRepository();
     this.parkingService = new ParkingService();
     this.notificationService = notificationService;
+    this.logger = new Logger('BookingService');
   }
 
   async getUserBookings(userId: string): Promise<BookingResponseDTO[]> {
@@ -124,6 +127,8 @@ export class BookingService {
         title: 'Booking Confirmed',
         message: `Your booking for slot ${booking.slot.slotNumber} has been confirmed from ${startTime.toLocaleString()} to ${endTime.toLocaleString()}.`,
       });
+
+      this.logger.info('Booking created', { id: booking.id, userId, slotId: booking.slotId });
 
       return BookingMapper.toDTO(booking);
     });
