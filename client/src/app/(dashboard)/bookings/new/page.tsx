@@ -26,18 +26,26 @@ export default function NewBookingPage() {
   useEffect(() => {
     apiClient.get('/vehicles')
       .then((res) => setVehicles(res.data.data))
-      .catch(() => {})
+      .catch(() => toast.error('Failed to load vehicles'))
       .finally(() => setIsLoading(false));
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    const start = new Date(form.startTime);
+    const end = new Date(form.endTime);
+
+    if (end <= start) {
+      toast.error('End time must be after start time');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const payload: any = {
         vehicleId: form.vehicleId,
-        startTime: new Date(form.startTime).toISOString(),
-        endTime: new Date(form.endTime).toISOString(),
+        startTime: start.toISOString(),
+        endTime: end.toISOString(),
         strategy: form.strategy,
       };
       if (form.slotId) payload.slotId = form.slotId;
