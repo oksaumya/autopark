@@ -7,16 +7,23 @@ import Link from 'next/link';
 import apiClient from '@/lib/api-client';
 import toast from 'react-hot-toast';
 import { CalendarCheck, Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function BookingsPage() {
   const { bookings, isLoading, refetch } = useBookings();
+  const router = useRouter();
 
   const handleAction = async (id: string, action: 'cancel' | 'checkin' | 'checkout') => {
     try {
       const method = action === 'cancel' ? 'put' : 'post';
       await apiClient[method](`/bookings/${id}/${action}`);
       toast.success(`Booking ${action} successful`);
-      refetch();
+      
+      if (action === 'checkout') {
+        router.push(`/payment?bookingId=${id}`);
+      } else {
+        refetch();
+      }
     } catch (err: any) {
       toast.error(err.response?.data?.error?.message || `Failed to ${action}`);
     }
