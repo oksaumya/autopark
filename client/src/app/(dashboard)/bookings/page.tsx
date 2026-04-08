@@ -7,23 +7,16 @@ import Link from 'next/link';
 import apiClient from '@/lib/api-client';
 import toast from 'react-hot-toast';
 import { CalendarCheck, Plus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 export default function BookingsPage() {
   const { bookings, isLoading, refetch } = useBookings();
-  const router = useRouter();
 
   const handleAction = async (id: string, action: 'cancel' | 'checkin' | 'checkout') => {
     try {
       const method = action === 'cancel' ? 'put' : 'post';
       await apiClient[method](`/bookings/${id}/${action}`);
       toast.success(`Booking ${action} successful`);
-      
-      if (action === 'checkout') {
-        router.push(`/payment?bookingId=${id}`);
-      } else {
-        refetch();
-      }
+      refetch();
     } catch (err: any) {
       toast.error(err.response?.data?.error?.message || `Failed to ${action}`);
     }
@@ -35,7 +28,7 @@ export default function BookingsPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">My Bookings</h1>
-        <Link href="/bookings/new" className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">
+        <Link href="/bookings/new" className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           <Plus className="w-4 h-4" /> New Booking
         </Link>
       </div>
@@ -69,16 +62,16 @@ export default function BookingsPage() {
                 <div className="flex gap-2">
                   {booking.status === 'CONFIRMED' && (
                     <>
-                      <button onClick={() => handleAction(booking.id, 'checkin')} className="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 cursor-pointer">
+                      <button onClick={() => handleAction(booking.id, 'checkin')} className="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700">
                         Check In
                       </button>
-                      <button onClick={() => handleAction(booking.id, 'cancel')} className="px-3 py-1.5 text-xs bg-red-100 text-red-700 rounded-lg hover:bg-red-200 cursor-pointer">
+                      <button onClick={() => handleAction(booking.id, 'cancel')} className="px-3 py-1.5 text-xs bg-red-100 text-red-700 rounded-lg hover:bg-red-200">
                         Cancel
                       </button>
                     </>
                   )}
                   {booking.status === 'ACTIVE' && (
-                    <button onClick={() => handleAction(booking.id, 'checkout')} className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">
+                    <button onClick={() => handleAction(booking.id, 'checkout')} className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                       Check Out
                     </button>
                   )}

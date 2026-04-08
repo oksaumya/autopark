@@ -50,7 +50,7 @@ export default function Sidebar() {
             key={item.href}
             href={item.href}
             className={cn(
-              'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm mb-1 transition-colors cursor-pointer',
+              'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm mb-1 transition-colors',
               pathname === item.href
                 ? 'bg-blue-600 text-white'
                 : 'text-gray-300 hover:bg-gray-800 hover:text-white'
@@ -95,7 +95,7 @@ export default function Sidebar() {
         </div>
         <button
           onClick={logout}
-          className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors w-full cursor-pointer"
+          className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors w-full"
         >
           <LogOut className="w-4 h-4" />
           Logout

@@ -8,19 +8,16 @@ import { PaymentResponseDTO, CreatePaymentDTO } from './payment.dto';
 import { BookingRepository } from '../booking/booking.repository';
 import { NotificationService } from '../notification/notification.service';
 import crypto from 'crypto';
-import { Logger } from '../../utils/logger';
 
 export class PaymentService {
   private paymentRepo: PaymentRepository;
   private bookingRepo: BookingRepository;
   private notificationService: NotificationService;
-  private logger: Logger;
 
   constructor(notificationService: NotificationService) {
     this.paymentRepo = new PaymentRepository();
     this.bookingRepo = new BookingRepository();
     this.notificationService = notificationService;
-    this.logger = new Logger('PaymentService');
   }
 
   async getUserPayments(userId: string): Promise<PaymentResponseDTO[]> {
@@ -64,8 +61,6 @@ export class PaymentService {
       title: 'Payment Successful',
       message: `Payment of $${Number(booking.totalAmount).toFixed(2)} processed. Transaction: ${transactionId}`,
     });
-
-    this.logger.info('Payment processed', { id: payment.id, userId, bookingId: data.bookingId, amount: Number(booking.totalAmount) });
 
     return PaymentMapper.toDTO(payment);
   }

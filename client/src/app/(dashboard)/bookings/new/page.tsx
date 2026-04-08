@@ -26,26 +26,18 @@ export default function NewBookingPage() {
   useEffect(() => {
     apiClient.get('/vehicles')
       .then((res) => setVehicles(res.data.data))
-      .catch(() => toast.error('Failed to load vehicles'))
+      .catch(() => {})
       .finally(() => setIsLoading(false));
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const start = new Date(form.startTime);
-    const end = new Date(form.endTime);
-
-    if (end <= start) {
-      toast.error('End time must be after start time');
-      setIsSubmitting(false);
-      return;
-    }
-
+    setIsSubmitting(true);
     try {
       const payload: any = {
         vehicleId: form.vehicleId,
-        startTime: start.toISOString(),
-        endTime: end.toISOString(),
+        startTime: new Date(form.startTime).toISOString(),
+        endTime: new Date(form.endTime).toISOString(),
         strategy: form.strategy,
       };
       if (form.slotId) payload.slotId = form.slotId;
@@ -71,7 +63,7 @@ export default function NewBookingPage() {
           <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle</label>
           <select
             value={form.vehicleId}
-            onChange={(e: any) => setForm((f: any) => ({ ...f, vehicleId: e.target.value }))}
+            onChange={(e) => setForm((f) => ({ ...f, vehicleId: e.target.value }))}
             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900"
             required
           >
@@ -80,21 +72,8 @@ export default function NewBookingPage() {
               <option key={v.id} value={v.id}>{v.licensePlate} - {v.type} {v.make} {v.model}</option>
             ))}
           </select>
-          {vehicles.length === 0 && !isLoading && (
-            <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-start space-x-3 mt-1">
-              <div className="flex-shrink-0 mt-0.5">
-                <svg className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm text-amber-800 font-medium">No vehicles registered</p>
-                <p className="text-sm text-amber-700 mt-1">
-                  You need at least one vehicle to create a booking. 
-                  <a href="/vehicles" className="ml-1 font-semibold underline hover:text-amber-900">Register a vehicle now →</a>
-                </p>
-              </div>
-            </div>
+          {vehicles.length === 0 && (
+            <p className="text-xs text-red-500 mt-1">No vehicles registered. <a href="/vehicles" className="underline">Add one first</a>.</p>
           )}
         </div>
 
@@ -103,7 +82,7 @@ export default function NewBookingPage() {
             <label className="block text-sm font-medium text-gray-700 mb-1">Allocation Strategy</label>
             <select
               value={form.strategy}
-              onChange={(e: any) => setForm((f: any) => ({ ...f, strategy: e.target.value }))}
+              onChange={(e) => setForm((f) => ({ ...f, strategy: e.target.value }))}
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900"
             >
               <option value="nearest">Nearest to Entry</option>
@@ -132,7 +111,7 @@ export default function NewBookingPage() {
             <input
               type="datetime-local"
               value={form.startTime}
-              onChange={(e: any) => setForm((f: any) => ({ ...f, startTime: e.target.value }))}
+              onChange={(e) => setForm((f) => ({ ...f, startTime: e.target.value }))}
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900"
               required
             />
@@ -142,7 +121,7 @@ export default function NewBookingPage() {
             <input
               type="datetime-local"
               value={form.endTime}
-              onChange={(e: any) => setForm((f: any) => ({ ...f, endTime: e.target.value }))}
+              onChange={(e) => setForm((f) => ({ ...f, endTime: e.target.value }))}
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900"
               required
             />

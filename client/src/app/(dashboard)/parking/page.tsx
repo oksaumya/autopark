@@ -29,7 +29,7 @@ export default function ParkingPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Parking Map</h1>
-        <button onClick={refetch} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">
+        <button onClick={refetch} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           Refresh
         </button>
       </div>
@@ -77,7 +77,7 @@ export default function ParkingPage() {
             key={slot.id}
             onClick={() => setSelectedSlot(slot)}
             className={cn(
-              'p-4 rounded-xl border-2 transition-all text-left cursor-pointer',
+              'p-4 rounded-xl border-2 transition-all text-left',
               slot.status === 'AVAILABLE' ? 'border-green-300 bg-green-50 hover:border-green-500' :
               slot.status === 'OCCUPIED' ? 'border-red-300 bg-red-50' :
               slot.status === 'RESERVED' ? 'border-yellow-300 bg-yellow-50' :
@@ -95,8 +95,8 @@ export default function ParkingPage() {
 
       {/* Slot Detail Modal */}
       {selectedSlot && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 cursor-pointer" onClick={() => setSelectedSlot(null)}>
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md cursor-default" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setSelectedSlot(null)}>
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <h2 className="text-xl font-bold mb-4">Slot {selectedSlot.slotNumber}</h2>
             <div className="space-y-3">
               <div className="flex justify-between"><span className="text-gray-500">Type:</span><span className="font-medium">{selectedSlot.type}</span></div>
@@ -110,7 +110,7 @@ export default function ParkingPage() {
                 Book This Slot
               </a>
             )}
-            <button onClick={() => setSelectedSlot(null)} className="w-full mt-3 px-4 py-2 text-sm text-gray-500 hover:text-gray-700 cursor-pointer">
+            <button onClick={() => setSelectedSlot(null)} className="w-full mt-3 px-4 py-2 text-sm text-gray-500 hover:text-gray-700">
               Close
             </button>
           </div>

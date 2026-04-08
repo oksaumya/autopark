@@ -16,17 +16,17 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-900 via-blue-900 to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
       <nav className="flex items-center justify-between px-8 py-6">
         <div className="flex items-center gap-2">
           <ParkingCircle className="w-8 h-8 text-blue-400" />
           <span className="text-2xl font-bold text-white">AutoPark</span>
         </div>
         <div className="flex gap-4">
-          <Link href="/login" className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors cursor-pointer">
+          <Link href="/login" className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors">
             Login
           </Link>
-          <Link href="/register" className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
+          <Link href="/register" className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             Register
           </Link>
         </div>
@@ -43,10 +43,10 @@ export default function Home() {
             intelligent allocation, and digital monitoring.
           </p>
           <div className="flex gap-4 justify-center mt-8">
-            <Link href="/register" className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors cursor-pointer">
+            <Link href="/register" className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
               Get Started
             </Link>
-            <Link href="/login" className="px-8 py-3 border border-gray-600 text-gray-300 rounded-lg font-medium hover:border-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Link href="/login" className="px-8 py-3 border border-gray-600 text-gray-300 rounded-lg font-medium hover:border-gray-400 hover:text-white transition-colors">
               Login
             </Link>
           </div>

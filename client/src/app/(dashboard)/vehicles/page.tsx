@@ -56,7 +56,7 @@ export default function VehiclesPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">My Vehicles</h1>
-        <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">
+        <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           <Plus className="w-4 h-4" /> Add Vehicle
         </button>
       </div>
@@ -96,10 +96,10 @@ export default function VehiclesPage() {
             </div>
           </div>
           <div className="flex gap-3">
-            <button type="submit" disabled={isSubmitting} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 cursor-pointer">
+            <button type="submit" disabled={isSubmitting} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
               {isSubmitting ? 'Adding...' : 'Add Vehicle'}
             </button>
-            <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-gray-500 hover:text-gray-700 cursor-pointer">Cancel</button>
+            <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-gray-500 hover:text-gray-700">Cancel</button>
           </div>
         </form>
       )}
@@ -122,7 +122,7 @@ export default function VehiclesPage() {
                   {v.color && <p className="text-sm text-gray-400">{v.color}</p>}
                   <p className="text-xs text-gray-400 mt-2">Compatible: {v.compatibleSlotTypes.join(', ')}</p>
                 </div>
-                <button onClick={() => handleDelete(v.id)} className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg cursor-pointer">
+                <button onClick={() => handleDelete(v.id)} className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg">
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>

@@ -117,6 +117,13 @@ npm run dev:client  # http://localhost:3000
 | User | john@example.com | user123 |
 | User | jane@example.com | user123 |
 
+## How to Run Tests
+
+```bash
+cd server
+npm test
+```
+
 ## API Endpoints (29 total)
 
 ### Auth

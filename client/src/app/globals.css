@@ -35,16 +35,6 @@ input::placeholder {
   color: #9ca3af !important;
 }
 
-/* Ensure all interactive elements show pointer cursor */
-button,
-a,
-select,
-[role="button"],
-input[type="submit"],
-input[type="button"] {
-  cursor: pointer;
-}
-
 /* Consistent table text color */
 table,
 table th,

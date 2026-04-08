@@ -1,7 +1,7 @@
-import { Booking, Prisma, BookingStatus, Vehicle, ParkingSlot, Payment } from '@prisma/client';
+import { Booking, Prisma, BookingStatus, Vehicle, ParkingSlot } from '@prisma/client';
 import { BaseRepository } from '../../core/abstract/BaseRepository';
 
-type BookingWithRelations = Booking & { vehicle: Vehicle; slot: ParkingSlot; payment?: Payment | null };
+type BookingWithRelations = Booking & { vehicle: Vehicle; slot: ParkingSlot };
 
 export class BookingRepository extends BaseRepository<Booking, Prisma.BookingCreateInput, Prisma.BookingUpdateInput> {
   protected entityName = 'Booking';

@@ -76,7 +76,7 @@ export default function AdminUsersPage() {
                 <td className="px-6 py-4">
                   <button
                     onClick={() => deactivate(u.id)}
-                    className="text-xs text-red-600 hover:text-red-800 cursor-pointer"
+                    className="text-xs text-red-600 hover:text-red-800"
                   >
                     Deactivate
                   </button>
