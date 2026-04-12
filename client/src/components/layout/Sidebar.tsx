@@ -83,21 +83,23 @@ export default function Sidebar() {
         )}
       </nav>
 
-      <div className="p-4 border-t border-gray-800">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold">
-            {user?.firstName?.[0]}{user?.lastName?.[0]}
+      <div className="p-4 border-t border-gray-800 space-y-1">
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-gray-800">
+          <div className="w-5 h-5 shrink-0 relative flex items-center justify-center">
+            <div className="absolute w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold">
+              {user?.firstName?.[0]}{user?.lastName?.[0]}
+            </div>
           </div>
-          <div>
-            <p className="text-sm font-medium text-white">{user?.firstName} {user?.lastName}</p>
-            <p className="text-xs text-gray-400">{user?.role}</p>
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-white truncate">{user?.firstName} {user?.lastName}</p>
+            <p className="text-xs text-gray-400 capitalize">{user?.role}</p>
           </div>
         </div>
         <button
           onClick={logout}
-          className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors w-full"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:bg-red-600/20 hover:text-red-400 transition-colors w-full"
         >
-          <LogOut className="w-4 h-4" />
+          <LogOut className="w-5 h-5 shrink-0" />
           Logout
         </button>
       </div>
