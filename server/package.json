@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
+    "build": "prisma generate && tsc",
+    "start": "node src/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "ts-node prisma/seed.ts",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.14.0",
+    "prisma": "^5.14.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -27,7 +28,6 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.12",
     "jest": "^29.7.0",
-    "prisma": "^5.14.0",
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
